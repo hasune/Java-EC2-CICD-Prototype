@@ -13,7 +13,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: /
+        working-directory: ./
 
     steps:
       - name: 체크아웃 Github-Action
