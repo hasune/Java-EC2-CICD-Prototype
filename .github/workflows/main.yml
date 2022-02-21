@@ -24,8 +24,9 @@ jobs:
         with:
           java-version: 11.0.8
 
-      - name: Look for gradlew
-        run: find / -type f -name "gradlew"
+      - name: 하아
+        run: |
+          ls -la
 
 #      - name: gradlew 권한 부여
 #        run: chmod +x ./gradlew
