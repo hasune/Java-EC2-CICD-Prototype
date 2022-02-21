@@ -30,7 +30,7 @@ jobs:
           pwd
           cd home
           ls -al
-          find / -type f -name "gradlew"
+          sudo find / -type f -name "gradlew"
           
 
 #      - name: gradlew 권한 부여
