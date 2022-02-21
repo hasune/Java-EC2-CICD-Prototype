@@ -15,14 +15,16 @@ jobs:
         shell: bash
         working-directory: ./
 
+    # https://github.com/actions/setup-java 여기 참조하믄 됨.
     steps:
       - name: 체크아웃 Github-Action
         uses: actions/checkout@v2
-
-      - name: 자바 JDK 11 설치
-        uses: actions/setup-java@v1
+      - name: 자바 Adopt JDK 17 설치
+        uses: actions/setup-java@v2
         with:
-          java-version: 11.0.8
+          distribution: 'adopt'
+          java-version: '17'
+          cache: 'gradle'
 
       - name: 도대체 어느디렉토리에 있니
         run: |
@@ -32,6 +34,7 @@ jobs:
           ls -al
           cd /home/runner/work/Java-EC2-CICD-Prototype/Java-EC2-CICD-Prototype/
           ls -al
+        # sudo find / -type f -name "gradlew" 정 못찾겠으면 이걸로 해서라도 gradlew 가 어디있는지 찾을 수 있다.
 
       - name: gradlew 권한 부여
         run: chmod +x ./gradlew
