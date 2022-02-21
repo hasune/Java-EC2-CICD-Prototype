@@ -25,7 +25,7 @@ jobs:
           java-version: 11.0.8
 
       - name: 여기가 어디야
-          run: pwd
+        run: pwd
 
       - name: 여기에 뭐가 있어
         run: ls -al
