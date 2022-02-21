@@ -30,7 +30,8 @@ jobs:
           pwd
           cd home
           ls -al
-          sudo find / -type f -name "gradlew"
+          cd /home/runner/work/Java-EC2-CICD-Prototype/Java-EC2-CICD-Prototype/
+          ls -al
           
 
 #      - name: gradlew 권한 부여
