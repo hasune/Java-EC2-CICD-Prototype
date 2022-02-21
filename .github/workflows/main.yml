@@ -24,15 +24,8 @@ jobs:
         with:
           java-version: 11.0.8
 
-      - name: 여기가 어디야
-        run: pwd
-
-      - name: 여기에 뭐가 있어
-        run: ls -al
-
-
-#      - name: gradlew 권한 부여
-#        run: chmod +x ./gradlew
+      - name: gradlew 권한 부여
+        run: chmod +x ./gradlew
 #
 #      - name: Gradle 빌드
 #        run: ./gradlew build
