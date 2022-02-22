@@ -14,4 +14,3 @@ public class ExampleResource {
         return "Hello World!! With AWS!";
     }
 }
-
