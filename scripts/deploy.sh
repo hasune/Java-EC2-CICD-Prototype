@@ -9,7 +9,7 @@ JAR_PATH=$REPOSITORY/build/quarkus-app/$JAR_NAME
 cd $REPOSITORY
 
 DATE=$(date +%Y-%m-%d-%H-%M-%S)
-PORT=8083
+PORT=8301
 
 # 현재 실행중인 서버 PID 조회
 runPid=$(pgrep -f $PROJECT)
@@ -22,7 +22,7 @@ fi
 runPortCount=$(ps -ef | grep $PROJECT | grep -v grep | grep $PORT | wc -l)
 if [ $runPortCount -gt 0 ]; then
   #    echo "현재 서버는 $PORT 로 실행중입니다"
-  PORT=8084
+  PORT=8302
 fi
 echo "Server $PORT 로 시작합니다.." >> $EC2_LOG
 
