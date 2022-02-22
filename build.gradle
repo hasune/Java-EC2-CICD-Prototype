@@ -14,6 +14,8 @@ dependencies {
     implementation 'io.quarkus:quarkus-resteasy'
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
+
+    implementation group: 'io.quarkus', name: 'quarkus-smallrye-health', version: '0.14.0'
 }
 
 group 'hasune.prototype'

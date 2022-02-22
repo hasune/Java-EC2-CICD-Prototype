@@ -1,14 +1,15 @@
 #!/bin/sh
 
+PROJECT=quarkus
 REPOSITORY=/home/ec2-user/backtest
+EC2_LOG=/home/ec2-user/deploy.log
+JAR_NAME=$(ls $REPOSITORY/build/quarkus-app/ | grep '.jar' | tail -n 1)
+JAR_PATH=$REPOSITORY/build/quarkus-app/$JAR_NAME
+
 cd $REPOSITORY
 
-sudo pip3 install -r requirements.txt
-
-EC2_LOG=/home/ec2-user/deploy.log
-PROJECT=flask
 DATE=$(date +%Y-%m-%d-%H-%M-%S)
-PORT=8301
+PORT=8083
 
 # 현재 실행중인 서버 PID 조회
 runPid=$(pgrep -f $PROJECT)
@@ -21,19 +22,20 @@ fi
 runPortCount=$(ps -ef | grep $PROJECT | grep -v grep | grep $PORT | wc -l)
 if [ $runPortCount -gt 0 ]; then
   #    echo "현재 서버는 $PORT 로 실행중입니다"
-  PORT=8302
+  PORT=8084
 fi
 echo "Server $PORT 로 시작합니다.." >> $EC2_LOG
 
 # 새로운 서버 실행
-nohup flask run --host=0.0.0.0 --port=$PORT >> $EC2_LOG 2>&1 & # EC2용
+nohup java -jar -Dquarkus.http.port=$PORT $JAR_PATH >> $EC2_LOG 2>&1 & # EC2용
+
 
 # 새롭게 실행한 서버의 health check
 echo "Health check $PORT" >> $EC2_LOG
 
 for retry in {1..10}; do
-  health=$(curl -s http://localhost:$PORT/health)
-  checkCount=$(echo $health | grep 'ok' | wc -l)
+  health=$(curl -s http://localhost:$PORT/q/health)
+  checkCount=$(echo $health | grep 'UP' | wc -l)
   if [ $checkCount -ge 1 ]; then
     echo "[$(date)] Server $PORT Started" >> $EC2_LOG
 

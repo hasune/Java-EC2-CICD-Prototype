@@ -26,7 +26,7 @@ jobs:
           java-version: '17'
           cache: 'gradle'
 
-      - name: 도대체 어느디렉토리에 있니
+      - name: gradlew은 도대체 어느디렉토리에 있니
         run: |
           ls -al
           pwd
@@ -46,9 +46,9 @@ jobs:
       - name: 작업 디렉토리 생성
         run: mkdir ./artifacts/
 
-      # appspec.yml 포함해서 압축 / quarkus는 종속성이 있어서 /build/quarkus-app 디렉토리를 통으로 압축한다.
+      # appspec.yml 포함해서 압축 / quarkus는 종속성이 있어서 /build/quarkus-app 디렉토리를 통으로 압축한다. / scripts의 디플로이 스크립트도 함께 압축
       - name: 생성한 디렉토리에 작업 결과물을 build.zip 파일로 작성
-        run: zip -r ./artifacts/build.zip ./build/quarkus-app/* appspec.yml
+        run: zip -r ./artifacts/build.zip ./build/quarkus-app/* ./scripts/* appspec.yml
 
       # AWS S3에 빌드 파일 보내즈앗
       - name: deploy to s3
